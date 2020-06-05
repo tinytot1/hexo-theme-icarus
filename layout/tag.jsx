@@ -1,5 +1,5 @@
 const { Component, Fragment } = require('inferno');
-const Index = require('./index');
+const Archive = require('./archive');
 
 module.exports = class extends Component {
     render() {
@@ -17,7 +17,7 @@ module.exports = class extends Component {
                     </nav>
                 </div>
             </div>
-            <Index config={config} page={page} helper={helper} />
+            <Archive config={config} page={page} helper={helper} />
         </Fragment>;
     }
 };
