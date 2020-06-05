@@ -19,12 +19,13 @@ class Footer extends Component {
             <div class="container">
                 <div class="level">
                     <div class="level-start">
-                        <a class="footer-logo is-block mb-2" href={siteUrl}>
+                        {/* <a class="footer-logo is-block mb-2" href={siteUrl}>
                             {logo && logo.text ? logo.text : <img src={logoUrl} alt={siteTitle} height="28" />}
-                        </a>
+                        </a> */}
                         <p class="size-small">
-                            <span dangerouslySetInnerHTML={{ __html: `&copy; ${siteYear} ${author || siteTitle}` }}></span>
-                            &nbsp;&nbsp;Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>&nbsp;&&nbsp;
+                            <span dangerouslySetInnerHTML={{ __html: `&copy; ${siteYear} ${siteTitle}` }}></span>
+                            <br />
+                            Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>&nbsp;&&nbsp;
                             <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
                             {showVisitorCounter ? <br /> : null}
                             {showVisitorCounter ? <span id="busuanzi_container_site_uv"
@@ -37,7 +38,7 @@ class Footer extends Component {
                                 const link = links[name];
                                 return <p class="control">
                                     <a class={`button is-transparent ${link.icon ? 'is-large' : ''}`} target="_blank" rel="noopener" title={name} href={link.url}>
-                                        {link.icon ? <i class={link.icon}></i> : name}
+                                        {link.icon ? link.icon.map(icon => (<><i class={icon}></i>&nbsp;</>)) : name}
                                     </a>
                                 </p>;
                             })}
@@ -60,7 +61,7 @@ module.exports = cacheComponent(Footer, 'common.footer', props => {
             const link = footer.links[name];
             links[name] = {
                 url: url_for(typeof link === 'string' ? link : link.url),
-                icon: link.icon
+                icon: link.icon ? Array.isArray(link.icon) ? link.icon : [link.icon] : undefined
             };
         });
     }

@@ -33,8 +33,8 @@ module.exports = class extends Component {
                     {index ? <a href={url_for(page.link || page.path)} class="image is-7by3">
                         <img class="thumbnail" src={get_thumbnail(page)} alt={page.title || get_thumbnail(page)} />
                     </a> : <span class="image is-7by3">
-                        <img class="thumbnail" src={get_thumbnail(page)} alt={page.title || get_thumbnail(page)} />
-                    </span>}
+                            <img class="thumbnail" src={get_thumbnail(page)} alt={page.title || get_thumbnail(page)} />
+                        </span>}
                 </div> : null}
                 {/* Metadata */}
                 <article class={`card-content article${'direction' in page ? ' ' + page.direction : ''}`} role="article">
@@ -77,6 +77,15 @@ module.exports = class extends Component {
                     </h1>
                     {/* Content/Excerpt */}
                     <div class="content" dangerouslySetInnerHTML={{ __html: index && page.excerpt ? page.excerpt : page.content }}></div>
+                    {/* 版权 */}
+                    {!index && page.copyright &&
+                        <ul class="post-copyright">
+                            <li><strong>本文标题：</strong><a href={page.permalink}>{page.title}</a></li>
+                            <li><strong>本文作者：</strong>{config.author}</li>
+                            <li><strong>发布时间：</strong>{page.date.format("YYYY-MM-DD")}</li>
+                            <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+                        </ul>
+                    }
                     {/* Tags */}
                     {!index && page.tags && page.tags.length ? <div class="article-tags size-small mb-4">
                         <span class="mr-2">#</span>
